@@ -49,7 +49,8 @@ function tictactoe() {
 }
 
 function play(){
-    let gameOver = null;
+    /**Commented for test purposes */
+    /*let gameOver = null;
     RL.question(PLAY_GAME_MESSAGE, function(number) { 
         if(!validateInputNumber(number) || !validateReplaceNumber(number)){
             printMessage(PLAY_ERROR_MESSAGE);         
@@ -59,7 +60,10 @@ function play(){
         if(!gameOver){
             return play();
         }
-    });
+    });*/
+    let randomNumber = Math.floor(Math.random() * HIGHEST_NUMBER_BOARD) + LOWEST_NUMBER_BOARD;
+    round(randomNumber);
+    RL.close();
 }
 
 function round(number){
@@ -156,7 +160,8 @@ function getStringBoard(board){
 }
 
 function printMessage(message){
-    console.log(message);
+    /**Commented for test purposes */
+    //console.log(message);
 }
 
 tictactoe(board);
