@@ -30,3 +30,29 @@ The game can be generalized to an m,n,k-game in which two players alternate plac
   5. follow instructions.
  
   6. have fun.
+
+#Coverage
+$  npm run test a -- --coverage
+
+> tictactoe@1.0.0 test
+> jest "a" "--coverage"
+
+PASS tst/tictactoe.test.js
+  √ Board Creation (2 ms)
+  √ Win (1 ms)
+  √ Lose (2 ms)
+  √ Draw (1 ms)
+  √ Validate Input Number (2 ms)
+
+--------------|---------|----------|---------|---------|-------------------
+File          | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
+--------------|---------|----------|---------|---------|-------------------
+All files     |      94 |    90.63 |     100 |   94.62 |
+ tictactoe.js |      94 |    90.63 |     100 |   94.62 | 86-90
+--------------|---------|----------|---------|---------|-------------------
+Test Suites: 1 passed, 1 total
+Tests:       5 passed, 5 total
+Snapshots:   0 total
+Time:        2.78 s, estimated 3 s
+Ran all test suites matching /a/i.
+
