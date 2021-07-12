@@ -4,7 +4,8 @@
   "description": "tictactoe game",
   "main": "index.js",
   "dependencies": {
-    "jest": "^27.0.6"
+    "jest": "^27.0.6",
+    "prompt": "^1.1.0"
   },
   "devDependencies": {},
   "scripts": {
