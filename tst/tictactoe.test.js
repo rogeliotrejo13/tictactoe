@@ -5,29 +5,30 @@ test('Board Creation', () => {
 });
 
 test('Win', () => {
-  expect(tictactoe.endGame([['X','X','X'],['','',''],['','','']])).toBe(1);
-  expect(tictactoe.endGame([['','',''],['X','X','X'],['','','']])).toBe(1);
-  expect(tictactoe.endGame([['','',''],['','',''],['X','X','X']])).toBe(1);
-  expect(tictactoe.endGame([['X','',''],['X','',''],['X','','']])).toBe(1);
-  expect(tictactoe.endGame([['','X',''],['','X',''],['','X','']])).toBe(1);
-  expect(tictactoe.endGame([['','','X'],['','','X'],['','','X']])).toBe(1);
-  expect(tictactoe.endGame([['X','',''],['','X',''],['','','X']])).toBe(1);
-  expect(tictactoe.endGame([['','','X'],['','X',''],['X','','']])).toBe(1);
+  expect(tictactoe.winnerMovementValidator('X',[['X','X','X'],['','',''],['','','']])).toBe(1);
+  expect(tictactoe.winnerMovementValidator('X',[['','',''],['X','X','X'],['','','']])).toBe(1);
+  expect(tictactoe.winnerMovementValidator('X',[['','',''],['','',''],['X','X','X']])).toBe(1);
+  expect(tictactoe.winnerMovementValidator('X',[['X','',''],['X','',''],['X','','']])).toBe(1);
+  expect(tictactoe.winnerMovementValidator('X',[['','X',''],['','X',''],['','X','']])).toBe(1);
+  expect(tictactoe.winnerMovementValidator('X',[['','','X'],['','','X'],['','','X']])).toBe(1);
+  expect(tictactoe.winnerMovementValidator('X',[['X','',''],['','X',''],['','','X']])).toBe(1);
+  expect(tictactoe.winnerMovementValidator('X',[['','','X'],['','X',''],['X','','']])).toBe(1);
 });
 
 test('Lose', () => {
-  expect(tictactoe.endGame([['O','O','O'],['','',''],['','','']])).toBe(0);
-  expect(tictactoe.endGame([['','',''],['O','O','O'],['','','']])).toBe(0);
-  expect(tictactoe.endGame([['','',''],['','',''],['O','O','O']])).toBe(0);
-  expect(tictactoe.endGame([['O','',''],['O','',''],['O','','']])).toBe(0);
-  expect(tictactoe.endGame([['','O',''],['','O',''],['','O','']])).toBe(0);
-  expect(tictactoe.endGame([['','','O'],['','','O'],['','','O']])).toBe(0);
-  expect(tictactoe.endGame([['O','',''],['','O',''],['','','O']])).toBe(0);
-  expect(tictactoe.endGame([['','','O'],['','O',''],['O','','']])).toBe(0);
+  expect(tictactoe.winnerMovementValidator('O',[['O','O','O'],['','',''],['','','']])).toBe(0);
+  expect(tictactoe.winnerMovementValidator('O',[['','',''],['O','O','O'],['','','']])).toBe(0);
+  expect(tictactoe.winnerMovementValidator('O',[['','',''],['','',''],['O','O','O']])).toBe(0);
+  expect(tictactoe.winnerMovementValidator('O',[['O','',''],['O','',''],['O','','']])).toBe(0);
+  expect(tictactoe.winnerMovementValidator('O',[['','O',''],['','O',''],['','O','']])).toBe(0);
+  expect(tictactoe.winnerMovementValidator('O',[['','','O'],['','','O'],['','','O']])).toBe(0);
+  expect(tictactoe.winnerMovementValidator('O',[['O','',''],['','O',''],['','','O']])).toBe(0);
+  expect(tictactoe.winnerMovementValidator('O',[['','','O'],['','O',''],['O','','']])).toBe(0);
 });
 
 test('Draw', () => {
-  expect(tictactoe.endGame([['X','O','X'],['O','O','X'],['X','X','O']])).toBe(2);
+  expect(tictactoe.winnerMovementValidator('X',[['X','O','X'],['O','O','X'],['X','X','O']])).toBe(2);
+  expect(tictactoe.winnerMovementValidator('O',[['X','O','X'],['O','O','X'],['X','X','O']])).toBe(2);
 });
 
 test('Validate Input Number', () => {

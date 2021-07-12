@@ -55,14 +55,8 @@ function play(){
             printMessage(PLAY_ERROR_MESSAGE);         
             return play();
         }     
-        round(number);
-        gameOver = endGame();
-        if(gameOver === LOSE || gameOver === WIN || gameOver === DRAW){
-            RL.close();
-            printMessage(GAME_OVER_MESSAGE);
-            printMessage(getStringBoard(board));
-            printMessage(END_GAME_MESSAGE[gameOver]);
-        }else{
+        gameOver = round(number);
+        if(!gameOver){
             return play();
         }
     });
@@ -72,17 +66,32 @@ function round(number){
     replaceInputInBoard(number,PLAYER_ONE);
     printMessage(PLAYER_ONE_MOVEMENT_MESSAGE);
     printMessage(getStringBoard(board));
-    if(!endGame()){
+    gameOver = finishGame(PLAYER_ONE);
+    if(!gameOver){
         randomPlay();  
         printMessage(PLAYER_TWO_MOVEMENT_MESSAGE);
         printMessage(getStringBoard(board));
-    }    
+        gameOver = finishGame(PLAYER_TWO);
+    }
+    return gameOver;
+}
+
+function finishGame(player){
+    gameOver = endGame(player);
+    if(gameOver === LOSE || gameOver === WIN || gameOver === DRAW){
+        RL.close();
+        printMessage(GAME_OVER_MESSAGE);
+        printMessage(getStringBoard(board));
+        printMessage(END_GAME_MESSAGE[gameOver]);
+        return true;
+    }
+    return false;
 }
 
 function randomPlay(){
     let randomNumber = 0;
     do{
-        randomNumber = Math.floor(Math.random() * HIGHEST_NUMBER_BOARD) + 1;
+        randomNumber = Math.floor(Math.random() * HIGHEST_NUMBER_BOARD) + LOWEST_NUMBER_BOARD;
         printMessage(THINKING_MESSAGE);
     }while(!replaceInputInBoard(randomNumber,PLAYER_TWO) && gamePlays < HIGHEST_NUMBER_BOARD);
     sleep.sleep(ROUND_SECONDS);
@@ -98,32 +107,37 @@ function replaceInputInBoard(number,value){
     return false;
 }
 
-function endGame(){
+function endGame(player){
     if(gamePlays>=HIGHEST_NUMBER_BOARD){return 2;}
-    let isPlayerOneWinner = winnerMovementValidator(PLAYER_ONE);
-    let isPlayerTwoWinner = winnerMovementValidator(PLAYER_TWO);
-    if(isPlayerOneWinner){return 1;}
-    if(isPlayerTwoWinner){return 0;}
-    return false;
+    let isPlayerWinner = winnerMovementValidator(player, board);
+    return isPlayerWinner;
 }
 
-function winnerMovementValidator(player){
+function winnerMovementValidator(player, board){
     let winner = false;
     let winnerCounter = 0;
+    let drawCounter = 0;
+
     for(let i = 0; i < WIN_SCENARIOS_MAPPING.length; i++){
         winnerCounter = 0;
+        drawCounter = 0;
         for(let j = 0; j < WIN_SCENARIOS_MAPPING[i].length; j++){
             for(let k = 0; k < WIN_SCENARIOS_MAPPING[i][j].length; k++){
                 if(WIN_SCENARIOS_MAPPING[i][j][k] === DEFAULT_SYMBOL_WIN_MAPPING && board[j][k] === player){
                     winnerCounter ++;
                 }
+                if(board[j][k] == PLAYER_ONE || board[j][k] == PLAYER_TWO){
+                    drawCounter ++;
+                }
             }            
         }
         if(winnerCounter == NUMBER_TO_WIN){
-            winner = true;
+            if(player == PLAYER_ONE){winner = 1;}
+            if(player == PLAYER_TWO){winner = 0;}
             break;
         }         
     }
+    if(drawCounter>=HIGHEST_NUMBER_BOARD){winner = 2;}    
     return winner;
 }
 
@@ -146,4 +160,4 @@ function printMessage(message){
 }
 
 tictactoe(board);
-module.exports = {getStringBoard, endGame, validateInputNumber};
+module.exports = {getStringBoard, winnerMovementValidator, validateInputNumber};
