@@ -5,7 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "jest": "^27.0.6",
-    "prompt": "^1.1.0"
+    "prompt": "^1.1.0",
+    "sleep": "^6.3.0"
   },
   "devDependencies": {},
   "scripts": {
