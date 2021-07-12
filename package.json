@@ -10,7 +10,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "jest",
-    "test:watch": "jest --coverage --watchAll=true"
+    "test:watch": "jest --coverage --watchAll=true --detectOpenHandles"
   },
   "repository": {
     "type": "git",
