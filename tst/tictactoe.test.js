@@ -1,7 +1,7 @@
 const tictactoe = require('../src/tictactoe');
 
 test('Board Creation', () => {
-  expect(tictactoe.printBoard([[1,2,3],[4,5,6],[7,8,9]])).toBe('1,2,3\n4,5,6\n7,8,9'); 
+  expect(tictactoe.getStringBoard([[1,2,3],[4,5,6],[7,8,9]])).toBe('1,2,3\n4,5,6\n7,8,9'); 
 });
 
 test('Win', () => {
