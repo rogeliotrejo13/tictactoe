@@ -1,0 +1,24 @@
+{
+  "name": "tictactoe",
+  "version": "1.0.0",
+  "description": "tictactoe game",
+  "main": "index.js",
+  "dependencies": {
+    "jest": "^27.0.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --coverage --watchAll=true"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rogeliotrejo13/tictactoe.git"
+  },
+  "author": "Rogelio Trejo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rogeliotrejo13/tictactoe/issues"
+  },
+  "homepage": "https://github.com/rogeliotrejo13/tictactoe#readme"
+}
