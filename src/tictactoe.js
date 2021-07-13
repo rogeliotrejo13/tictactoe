@@ -1,16 +1,9 @@
-const READLINE = require("readline");
-const RL = READLINE.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
 const PLAYER_ONE = 'X';
 const PLAYER_TWO = 'O';
 const BOARD_MAPPING = {1: [0,0], 2: [0,1], 3: [0,2], 4: [1,0], 5: [1,1], 6: [1,2], 7: [2,0], 8: [2,1], 9: [2,2]}
 const BOARD_CREATION_MESSAGE = "Game Board Creation...";
 const BOARD_CREATED_MESSAGE = "Board Created.";
 const START_GAME_MESSAGE = "The game will start with player "+PLAYER_ONE;
-const PLAY_GAME_MESSAGE = "Please choice a number to play:";
-const PLAY_ERROR_MESSAGE = "Please type a number from 1-9 available in game board."
 const GAME_OVER_MESSAGE = "Final Board - Game Over";
 const END_GAME_MESSAGE =   ["PLAYER " + PLAYER_TWO + " WON!", "PLAYER " + PLAYER_ONE + " WON!", "GAME ENDS WITH A DRAW!"];
 const PLAYER_ONE_MOVEMENT_MESSAGE = "Game board movement, player "+PLAYER_ONE;
@@ -49,17 +42,17 @@ function tictactoe() {
 }
 
 function play(){
-    let gameOver = null;
-    RL.question(PLAY_GAME_MESSAGE, function(number) { 
-        if(!validateInputNumber(number) || !validateReplaceNumber(number)){
-            printMessage(PLAY_ERROR_MESSAGE);         
+    do{
+        let gameOver = null;
+        let randomNumber = Math.floor(Math.random() * HIGHEST_NUMBER_BOARD) + LOWEST_NUMBER_BOARD;
+        if(!validateInputNumber(randomNumber) || !validateReplaceNumber(randomNumber)){        
             return play();
         }     
-        gameOver = round(number);
+        gameOver = round(randomNumber);
         if(!gameOver){
             return play();
         }
-    });
+    }while(endGame(PLAYER_ONE) == false && !endGame(PLAYER_TWO) == false);
 }
 
 function round(number){
@@ -79,7 +72,6 @@ function round(number){
 function finishGame(player){
     gameOver = endGame(player);
     if(gameOver === LOSE || gameOver === WIN || gameOver === DRAW){
-        RL.close();
         printMessage(GAME_OVER_MESSAGE);
         printMessage(getStringBoard(board));
         printMessage(END_GAME_MESSAGE[gameOver]);
