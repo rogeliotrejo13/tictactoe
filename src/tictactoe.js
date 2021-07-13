@@ -148,7 +148,8 @@ function getStringBoard(board){
 }
 
 function printMessage(message){
-    console.log(message);
+    /**Disable for test purposes */
+    //console.log(message);
 }
 
 tictactoe(board);
